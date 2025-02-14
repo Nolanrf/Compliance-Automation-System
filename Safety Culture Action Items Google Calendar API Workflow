@@ -1,0 +1,53 @@
+// Define the function to create a new task in Google Tasks
+export async function createGoogleTask({
+    taskListId,
+    title,
+    description,
+    site,
+    createdAt,
+    priorityLevel,
+    dueDateOffset, // Optional custom due date offset
+  }: {
+    taskListId: string; // Google Tasks requires a task list ID
+    title: string;
+    description: string;
+    site: string;
+    createdAt: string;
+    priorityLevel: 'low' | 'medium' | 'high';
+    dueDateOffset?: number; // Allows custom due date adjustment
+  }): Promise<{ result: any }> {
+    // Determine the due date based on the priority level
+    let dueDate: Date;
+    const createdDate = new Date(createdAt);
+    switch (priorityLevel) {
+      case 'low':
+        dueDate = new Date(createdDate.setDate(createdDate.getDate() + 7)); // 1 week later
+        break;
+      case 'medium':
+        dueDate = new Date(createdDate.setDate(createdDate.getDate() + 3)); // 3 days later
+        break;
+      case 'high':
+        dueDate = new Date(createdDate.setDate(createdDate.getDate() + 1)); // 1 day later
+        break;
+      default:
+        throw new Error('Invalid priority level');
+    }
+  
+    // Adjust due date if a custom offset is provided
+    if (dueDateOffset) {
+      dueDate = new Date(createdDate.setDate(createdDate.getDate() + dueDateOffset));
+    }
+  
+    // Construct the task object
+    const task = {
+      title: title,
+      notes: `${description}\nSite: ${site}\nPriority: ${priorityLevel}`,
+      due: dueDate.toISOString().split('T')[0] + 'T00:00:00Z', // Google Tasks ignores time, so set it to midnight UTC
+    };
+  
+    // Construct the API URL with the taskListId path parameter
+    const url = `https://www.googleapis.com/tasks/v1/lists/${encodeURIComponent(taskListId)}/tasks`;
+  
+    // Make the API request using fetchWithZapier
+    const
+  
