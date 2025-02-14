@@ -1,5 +1,7 @@
-This project automates compliance tracking by integrating SafetyCulture, Google Tasks, and Google Sheets. Whenever a new action item is created in SafetyCulture, a corresponding task is generated in Google Tasks, and the details are logged in Google Sheets for tracking and reporting. This eliminates manual task creation, improves accountability, and streamlines the follow-up process for compliance issues.
+This project automates compliance tracking by integrating SafetyCulture, Google Calendar Tasks, and Google Sheets. Whenever a new action item is created in SafetyCulture, a corresponding task is generated in Google Calendar Tasks, and the details are logged in Google Sheets for tracking and reporting. This eliminates manual task creation, improves accountability, and streamlines the follow-up process for compliance issues.
+
 Features:
+
 - Automated Task Creation – When a compliance action is recorded in SafetyCulture, a corresponding task is created in Google Tasks.
 - Dynamic Due Dates – Tasks are assigned due dates based on priority:
   High Priority: 1-2 days
